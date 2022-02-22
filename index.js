@@ -1,37 +1,29 @@
 /* eslint-disable linebreak-style */
-class BookList {
-  constructor() {
-    this.bookList = [];
-  }
+import { DateTime } from './node_modules/luxon/src/luxon.js';
+import BookList from './modules/booklists.js';
+import { bookAdd, bookRemove, displayWantedSection } from './modules/events.js';
+import { showBookList } from './modules/functions.js';
 
-  addBook(title = '', author = '') {
-    const list = document.querySelector('.booklist');
-    list.style.padding = '0';
-    const li = document.createElement('li');
-    li.className = 'book-item';
-    li.style.margin = '0';
-    li.style.listStyleType = 'none';
-    li.style.background = '#E7E9EB';
-    const bookTitle = document.createElement('p');
-    bookTitle.className = 'title';
-    bookTitle.innerText = `"${title}" by`;
-    const bookAuthor = document.createElement('p');
-    bookAuthor.className = 'author';
-    bookAuthor.innerText = author;
-    const removeBtn = document.createElement('button');
-    removeBtn.className = 'remove';
-    removeBtn.innerText = 'Remove';
-    li.appendChild(bookTitle);
-    li.appendChild(bookAuthor);
-    li.appendChild(removeBtn);
-    list.appendChild(li);
-    const book = { title, author };
-    this.bookList.push(book);
-    window.localStorage.setItem('bookList', JSON.stringify(this.bookList));
-  }
+const listOption = document.querySelector('#list');
+const inputOption = document.querySelector('#add-new');
+const contactOption = document.querySelector('#contact');
+const listSection = document.querySelector('.book-section');
+const inputSection = document.querySelector('.add_book');
+const contactSection = document.querySelector('.contact');
+const sections = [listSection, inputSection, contactSection];
 
-  removeBook(index) {
-    this.bookList = this.bookList.filter((book, i) => this.bookList[index] !== this.bookList[i]);
-    window.localStorage.setItem('bookList', JSON.stringify(this.bookList));
-  }
-}
+listOption.addEventListener('click', (event) => displayWantedSection(event, sections));
+inputOption.addEventListener('click', (event) => displayWantedSection(event, sections));
+contactOption.addEventListener('click', (event) => displayWantedSection(event, sections));
+
+const date = document.querySelector('#date');
+date.innerText = DateTime.now().toLocaleString(DateTime.DATETIME_FULL_WITH_SECONDS);
+
+const listOfBooks = new BookList();
+
+const addBtn = document.querySelector('.add');
+addBtn.addEventListener('click', () => bookAdd(listOfBooks));
+
+document.addEventListener('click', (event) => bookRemove(event, listOfBooks));
+
+showBookList(listOfBooks);
