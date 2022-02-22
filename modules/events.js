@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 
-import { checkListHeading } from './functions.js';
+import { updateLocalStorage } from './functions.js';
 
 export const bookAdd = (listOfBooks) => {
   const title = document.querySelector('#book_title').value;
@@ -8,7 +8,7 @@ export const bookAdd = (listOfBooks) => {
   document.querySelector('#book_title').value = null;
   document.querySelector('#book_author').value = null;
   listOfBooks.addBook(title, author);
-  checkListHeading(listOfBooks);
+  updateLocalStorage(listOfBooks);
 };
 
 export const bookRemove = (e, listOfBooks) => {
@@ -18,10 +18,10 @@ export const bookRemove = (e, listOfBooks) => {
     listOfBooks.removeBook(index);
     document.querySelectorAll('.book-item')[index].remove();
   }
-  checkListHeading(listOfBooks);
+  updateLocalStorage(listOfBooks);
 };
 
-export const displayWantedSection = (event, arr) => {
+export const showFocusedSection = (event, arr) => {
   const listItems = document.querySelectorAll('.nav-list-item');
   const targetIndex = Array.from(listItems).indexOf(event.target);
   const targetSection = arr[targetIndex];

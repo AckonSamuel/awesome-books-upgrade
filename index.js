@@ -1,7 +1,7 @@
 /* eslint-disable linebreak-style */
 import { DateTime } from './node_modules/luxon/src/luxon.js';
 import BookList from './modules/booklists.js';
-import { bookAdd, bookRemove, displayWantedSection } from './modules/events.js';
+import { bookAdd, bookRemove, showFocusedSection } from './modules/events.js';
 import { showBookList } from './modules/functions.js';
 
 const listOption = document.querySelector('#list');
@@ -12,9 +12,9 @@ const inputSection = document.querySelector('.add_book');
 const contactSection = document.querySelector('.contact');
 const sections = [listSection, inputSection, contactSection];
 
-listOption.addEventListener('click', (event) => displayWantedSection(event, sections));
-inputOption.addEventListener('click', (event) => displayWantedSection(event, sections));
-contactOption.addEventListener('click', (event) => displayWantedSection(event, sections));
+listOption.addEventListener('click', (event) => showFocusedSection(event, sections));
+inputOption.addEventListener('click', (event) => showFocusedSection(event, sections));
+contactOption.addEventListener('click', (event) => showFocusedSection(event, sections));
 
 const date = document.querySelector('#date');
 date.innerText = DateTime.now().toLocaleString(DateTime.DATETIME_FULL_WITH_SECONDS);

@@ -1,6 +1,6 @@
 /* eslint-disable linebreak-style */
 
-export const checkListHeading = () => {
+export const updateLocalStorage = () => {
   if (!JSON.parse(localStorage.bookList).length) {
     document.querySelector('#list-heading').classList.add('dn');
     return;
@@ -8,7 +8,7 @@ export const checkListHeading = () => {
   document.querySelector('#list-heading').classList.remove('dn');
 };
 export const showBookList = (listOfBooks) => {
-  checkListHeading(listOfBooks);
+  updateLocalStorage(listOfBooks);
   if (!JSON.parse(localStorage.bookList).length) {
     return;
   }
