@@ -5,8 +5,6 @@
 > Adding, Removing& displaying book list.
 
 
-first project at mcroverse module 2 :
-
  Displaying list of books
 
 ## Built With
